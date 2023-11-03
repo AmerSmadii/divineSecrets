@@ -41,18 +41,18 @@
 //     }
 // });
 
-// app.listen(port, () => {
-//     console.log(`Server is running on port ${port}`);
-// });
-
+// server.js
+const db =require ('./db');
 const express = require('express');
 const app = express();
 const port = 3000;
-const db = require('./db');
-const appRoutes = require('./routes/appRoutes');
 
-app.use('/', appRoutes);
+const productController = require('./controllers/productController');
+
+app.get('/home', productController.getAllProducts);
+app.get('/categorys/:category', productController.getProductsByCategory);
+app.get('/products_details/:id', productController.getProductById);
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+    console.log(`Server is running on port ${port}`) ;
 });
